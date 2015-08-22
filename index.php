@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>IXONY | Nogor template</title>
+    <title>Dynamic Website Project with PHP</title>
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional theme -->
@@ -23,98 +23,14 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container header-top">
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 pull-left">
-          <div class="logo">
-            <img class="img-responsive" src="images/logo_1428087229.png" alt="LOGO" title="LOGO"/> 
-          </div><!--logo ends-->
-        </div><!--col ends-->
-        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-7 pull-right">
-          <nav>
-            <ul id="uplink">
-              <li><a href="contact.html">CONTACT |</a></li>
-              <li><a href="#">ABOUT |</a></li>
-              <li><a href="#">CAREER</a></li>
-            </ul>
-          </nav>
-        </div><!--uplink ends-->
-      </div><!--row ends-->
-    </div><!--header-top-->
 
+    <?php include ("include/header.php");?>
    
-    <div class="container top-menu">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-menu">
-          <nav class="navbar navbar-default-custom">
-            <div class="container-fluid"style="padding-left: 0px; padding-right: 0px;">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-              </div>
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-nav-custom">
-                  <li><a href="#">HOME</a></li>
-                  <li><a href="#">HOME</a></li>
-                  <li><a href="#">HOME</a></li>
-                  <li><a href="#">HOME</a></li>
-                  <li><a href="#">HOME</a></li>
-                  
-                  
-                </ul>
+    <?php include ("include/navbar.php");?>
+   
+    <?php include ("include/main_content.php");?>
 
-              </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav>        
-        </div><!--menu ends-->
-      </div><!--row ends-->
-    </div><!--top-menu ends-->
-
-    <div class="container content">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h1>Title</h1>
-        <p>Description</p>
-        <div class="navbar-text">
-        <h6><small><strong>SHARE: &nbsp;</strong></small></h6>
-        <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
-        <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
-        <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
-        <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
-        </div>
-        </div>
-      </div>
-    </div>
-
-
-     
-  
-  
-  <div class="container footer">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-        <p class="copyright">Copyright &copy; 2015 <a href="http://www.nogorsolutions.com/">NOGOR Solutions</a></p>
-      </div><!--col ends-->
-      <div class="col-xs-12 col-sm-6 col-md-9 col-lg-9">
-        <nav>
-            <ul id="bottom-link">
-              <li><a href="#">Terms & Condition |</a></li>
-              <li><a href="#">Privacy Statement |</a></li>
-              <li><a href="#">Employee Access |</a></li>
-              <li><a href="contact.html">Contact |</a></li>
-              <li><a href="#">Careers</a></li>
-            </ul><!--bottom-link ends-->
-          </nav>
-        </div><!--uplink ends-->
-      </div><!--row-->
-    </div><!--footer ends-->
-
+    <?php include ("include/footer.php");?>
 
 
   

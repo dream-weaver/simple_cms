@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>EDIT POST</title>
+    <title>INSERT POST</title>
     <!-- Bootstrap -->
     <link href="../../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional theme -->
     <link rel="stylesheet" href="../../Bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../../styles/style.css">
     <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+    <script src="../ckeditor/ckeditor.js"></script>
 
 
 
@@ -49,29 +50,6 @@
   $post_keywords="";
   $post_content="";
   $post_image="";
-
-include("../include/connect.php");
-
-  $id=$_GET['id'];
-//$name=$_GET['name'];
-// sql to select a record
-$sql = "SELECT * FROM posts WHERE post_id=$id";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-  // output data of each row
-   while($row = $result->fetch_assoc()) {
-      $post_title=$row["post_title"];
-      $post_date=$row["post_date"];
-      $post_author=$row["post_author"];
-      $post_image=$row["post_image"];
-      $post_keywords=$row["post_keywords"];
-      $post_content=$row["post_content"];
-    }
-      
-  } else {
-      echo "0 results";
-  }
-$conn->close();
 
 
   if(isset($_POST['submit'])){
@@ -124,7 +102,7 @@ $conn->close();
   <div class="container form">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h1>EDIT CONTENT</h1>
+        <h1>Insert New Post Here</h1>
 
         <div class="alert <?php if(!empty($error_occured)){echo "alert-danger";} ?>" role="alert">
             <?php if(!empty($error_title)){?>
@@ -154,7 +132,7 @@ $conn->close();
           </h3>
           </div>
 
-        <form action="edit_content.php?id=<?php echo $id;?>" method="post" enctype="multipart/form-data">
+        <form action="insert_post.php" method="post" enctype="multipart/form-data">
           <div class="form-group <?php if (!empty($error_title)){echo "has-error";}?>">
             <label for="exampleInputEmail1">Post Title:*</label><span class="error"><?php echo $error_title;  ?></span>
             <input class="form-control" type="text" value="<?php echo $post_title; ?>" name="title">
@@ -174,9 +152,9 @@ $conn->close();
           </div>
           <div class="form-group <?php if (!empty($error_content)){echo "has-error";}?>">
             <label for="exampleInputEmail1"> Post Content:*</label><span class="error"><?php echo $error_content;  ?></span>
-            <textarea class="form-control" rows="10" cols="40" name="content"><?php echo $post_content; ?></textarea>
+            <textarea class="form-control" rows="10" cols="40"  name="content" id="content"><?php echo $post_content; ?></textarea>
           </div>
-          <button type="submit" value="Publish_Now" name="submit" class="btn btn-danger">Update</button>  
+          <button type="submit" value="Publish_Now" name="submit" class="btn btn-danger">Submit</button>  
         </form>
       </div>
     </div>
@@ -206,11 +184,17 @@ $conn->close();
     
     
 });
+
+
     </script>
+    <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+            </script>
 
   </body>
 </html>
-
 <?php
   include("../include/connect.php");
 
@@ -218,19 +202,23 @@ $conn->close();
       echo "Thank You. Your form has been submitted successfully!!";
 
   move_uploaded_file($image_tmp, "images/$post_image");
-  // sql to update table
-$sql = "UPDATE posts SET post_title='$post_title', post_date='$post_date', post_author='$post_author', post_image='$post_image', post_keywords='$post_keywords', post_content='$post_content' WHERE post_id='$id'";
-echo $sql;
-if ($conn->query($sql) === TRUE) {
-    echo "Update Post Content successfully";
-} else {
-    echo "Error updating Post Content: " . $conn->error;
-}
+  // sql to create table
+  $sql = "INSERT INTO `posts`(`post_title`, `post_date`, `post_author`, `post_image`, `post_keywords`, `post_content`) 
+  VALUES ('$post_title','$post_date','$post_author',' $post_image','$post_keywords','$post_content')";
 
-$conn->close();
-}
-?> 
-<a href="list_content.php">Back to Admin List of Contents</a>
+  if ($conn->query($sql) === TRUE) {
+      echo "<strong>Post Published successfully !</strong>";
+  } else {
+      echo "Error publishing Post values: " . $conn->error;
+  }
+
+  $conn->close();
+  }
+
+?>
+<a href="list_content.php">Go to Admin List of Contents</a>
+
+
 
 
 

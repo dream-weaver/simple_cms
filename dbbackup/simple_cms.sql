@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2015 at 04:24 PM
+-- Generation Time: Aug 25, 2015 at 04:33 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -23,6 +23,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `menu`
+--
+
+CREATE TABLE IF NOT EXISTS `menu` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_name` varchar(256) NOT NULL,
+  `menu_url` varchar(256) NOT NULL,
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -35,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `post_keywords` text NOT NULL,
   `post_content` varchar(1000) NOT NULL,
   PRIMARY KEY (`post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `posts`
@@ -46,7 +59,8 @@ INSERT INTO `posts` (`post_id`, `post_title`, `post_date`, `post_author`, `post_
 (15, 'Lorem Ipsum', '2022-08-15', 'Keri Elkins', ' ', 'Sports, Onion, Headlines, real, stories', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. '),
 (16, 'Lorem Ipsum using dummy text', '2022-08-15', 'Suri', ' ', 'Sports, Onion, Headlines, real, stories', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or '),
 (17, 'Cold was my soul', '2023-08-15', 'Cradle of Filth', ' ', 'Untold, was, pain, cold, Cradle, soul, filth, of, faced, rose', 'Cold was my soul, untold was da pain, i faced when you left me a rose in the.!!'),
-(20, 'Somewhere I belong', '2022-08-15', 'Linkin Park', ' ', 'somewhere, I, belong, Linkin Park', 'It starts with one thing I dont know why it doesnt even matter how hard you try keep that in mind I designed this rhyme to explain in due time, all i know');
+(20, 'Somewhere I belong', '2022-08-15', 'Linkin Park', ' ', 'somewhere, I, belong, Linkin Park', 'It starts with one thing I dont know why it doesnt even matter how hard you try keep that in mind I designed this rhyme to explain in due time, all i know'),
+(22, 'Cricket', '2023-08-15', 'Laura Depta', ' ', 'Yesterday', '<p><span style="font-size:14px"><span style="font-family:georgia,serif">Hello World!!!</span></span></p>\r\n\r\n<p><strong>BOLD <em>ITALIC</em></strong></p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -59,7 +73,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_name` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_name`, `password`) VALUES
+(1, 'admin', 'admin123');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

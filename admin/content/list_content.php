@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  include ("../../include/functions.php");
+  if(!is_user_authentic()){
+    header( 'Location: ../login.php' );
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,7 +57,9 @@ $conn->close();
       </div>
     </div>
   </div>
-<a href="insert_post.php">Add New</a>
+<a href="insert_post.php">Add New</a><br>
+<a href="../logout.php">Log out</a>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

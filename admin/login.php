@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  include ("../include/functions.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Login Form in PHP with Session</title>
+    <title>LOGIN form in PHP</title>
 
     <!-- Bootstrap -->
     <link href="../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -18,114 +22,150 @@
     <![endif]-->
   </head>
   <body>
-    <h1>PHP Login Session Example</h1>
-<style>
-#main {
-width:960px;
-margin:50px auto;
-font-family:raleway
+  <style>
+  body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
 }
-.error {
-color:red
-}
-h2 {
-background-color:#FEFFED;
-text-align:center;
-border-radius:10px 10px 0 0;
-margin:-10px -40px;
-padding:15px
-}
-hr {
-border:0;
-border-bottom:1px solid #ccc;
-margin:10px -40px;
-margin-bottom:30px
-}
-#login {
-width:300px;
-float:left;
-border-radius:10px;
-font-family:raleway;
-border:2px solid #ccc;
-padding:10px 40px 25px;
-margin-top:70px
-}
-input[type=text],input[type=password] {
-width:99.5%;
-padding:10px;
-margin-top:8px;
-border:1px solid #ccc;
-padding-left:5px;
-font-size:16px;
-font-family:raleway
-}
-input[type=submit] {
-width:100%;
-background-color:#FFBC00;
-color:#fff;
-border:2px solid #FFCB00;
-padding:10px;
-font-size:20px;
-cursor:pointer;
-border-radius:5px;
-margin-bottom:15px
-}
-#profile {
-padding:50px;
-border:1px dashed grey;
-font-size:20px;
-background-color:#DCE6F7
-}
-#logout {
-float:right;
-padding:5px;
-border:dashed 1px gray
-}
-a {
-text-decoration:none;
-color:#6495ed
-}
-i {
-color:#6495ed
-}
-</style>
-<?php
-  echo "<pre>";
-  print_r($_POST);
-  echo "</pre>";
-$error_username="";
-$error_password="";
 
-	if(isset($_POST['submit'])){
-	
-			//validate username fields
-			if(empty($_POST['username'])){
-				$error_username="UserName is required!";
-			}
-			if(empty($_POST['password'])){
-				$error_password="Password is required";
-			}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.error{
+  color:red;
+}
+.message{
+  color:green;
+}
+  </style>
 
-		}
-	
-?>
-<div id="main">
-<h1>PHP Login Session Example</h1>
-<div id="login">
-<h2>Login Form</h2>
-<form action="login.php" method="post">
-<label>UserName:*</label><span class="error"><?php echo $error_username; ?></span>
-<input id="name" name="username" value="" placeholder="username" type="text">
-<label>Password:*</label><span class="error"><?php echo $error_password; ?></span>
-<input id="password" name="password" value="" placeholder="**********" type="password">
-<input name="submit" type="submit" value="Login ">
-</form>
-</div>
-</div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <?php
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+
+    $error_username="";
+    $error_password="";
+    $error_occured="";
+    $username="";
+    $password="";
+
+    if(isset($_POST['submit'])){
+      if($_POST['submit']=="login"){
+        if(empty($_POST['username'])){
+          $error_username="Error occured: Username is required !<br>";
+          $error_occured=1;
+        }
+        if(empty($_POST['password'])){
+          $error_password="Error occured: Password is required !<br>";
+          $error_occured=1;
+        }
+        if(!empty($_POST['username'])){
+          $username=$_POST['username'];
+        }
+        if(!empty($_POST['password'])){
+          $password=$_POST['password'];
+        }
+      }
+    }
+
+  ?>
+
+    <div class="container">
+
+      <form class="form-signin" action="login.php" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <div class="alert <?php if(!empty($error_occured)){echo "alert-danger";}?>" role="alert">
+        <?php echo $error_username; ?>
+        <?php echo $error_password; ?>
+        </div>
+  <!--      <div class="message">
+        <?php if(empty($error_occured) && isset($_POST['submit'])){
+          echo "Your form has been submitted successfully!!";
+          }?>
+        </div>-->
+        <div class="form-group <?php if(!empty($error_username)){echo "has-error";} ?>">
+        <label for="inputEmail" >User Name:*</label><span class="error"><?php echo $error_username; ?></span>
+        <input type="text" name="username" value="<?php echo $username; ?>" id="inputEmail" class="form-control" placeholder="User Name">
+        </div>
+        <div class="form-group <?php if(!empty($error_password)){echo "has-error";} ?>">
+        <label for="inputPassword">Password:*</label><span class="error"><?php echo $error_password; ?></span>
+        <input type="password" name="password" value="<?php echo $password; ?>" id="inputPassword" class="form-control" placeholder="Password">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-success btn-block" name="submit" value="login" type="submit">Log in</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../Bootstrapjs/bootstrap.min.js"></script>
+    <script src="../Bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
+
+<?php
+
+$error=''; // Variable To Store Error Message
+if (isset($_POST['submit'])) {
+if (empty($_POST['username']) || empty($_POST['password'])) {
+$error = "Username or Password is invalid";
+}
+else
+{
+include("include/connect.php");
+// sql to create table
+  $sql = "SELECT * from user WHERE password='$password' AND user_name='$username'";
+  $sql;
+  $result = $conn->query($sql);
+  if ($result->num_rows == 1){ 
+      echo "<strong>Login successfully !</strong>";
+      write_session();
+      header( 'Location: content/list_content.php' ) ;
+  } else {
+      echo "Username or Password is invalid";
+  }
+
+  $conn->close();
+  }
+}
+?>

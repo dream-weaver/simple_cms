@@ -19,15 +19,15 @@
 
                   <?php
                     include("dbconnection.php");
-                    $sql = "SELECT * FROM menu";
+                    $sql = "SELECT * FROM categories";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                       // output data of each row
                        while($row = $result->fetch_assoc()) {
-                          $menu_id=$row["menu_id"];
-                          $menu_name=$row["menu_name"];
+                          $cat_id=$row["cat_id"];
+                          $cat_title=$row["cat_title"];
 
-                          echo "<li><a href='index.php?menu=$menu_id'>$menu_name</a></li>";
+                          echo "<li><a href='index.php?cat=$cat_id'>$cat_title</a></li>";
                         }
                           
                       } else {

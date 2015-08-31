@@ -218,22 +218,7 @@ $conn->close();
       echo "Thank You. Your form has been submitted successfully!!";
 
   move_uploaded_file($image_tmp, "images/$post_image");
-  // sql to update table
-$sql = "UPDATE posts SET post_title='$post_title', post_date='$post_date', post_author='$post_author', post_image='$post_image', post_keywords='$post_keywords', post_content='$post_content' WHERE post_id='$id'";
-echo $sql;
-if ($conn->query($sql) === TRUE) {
-    echo "Update Post Content successfully";
-} else {
-    echo "Error updating Post Content: " . $conn->error;
-}
-
-$conn->close();
-}
-?> 
-<a href="list_content.php">Back to Admin List of Contents</a>
-
-
-
+  c
 
 
 

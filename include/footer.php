@@ -4,15 +4,13 @@
         <p class="copyright">Copyright &copy; 2015 <a href="http://www.nogorsolutions.com/">NOGOR Solutions</a></p>
       </div><!--col ends-->
       <div class="col-xs-12 col-sm-6 col-md-9 col-lg-9">
-        <nav>
-            <ul id="bottom-link">
-              <li><a href="#">Terms & Condition |</a></li>
-              <li><a href="#">Privacy Statement |</a></li>
-              <li><a href="#">Employee Access |</a></li>
-              <li><a href="contact.html">Contact |</a></li>
-              <li><a href="#">Careers</a></li>
-            </ul><!--bottom-link ends-->
-        </nav>
+      <div class="navbar-text">
+        <h6><small><strong>SHARE: &nbsp;</strong></small></h6>
+        <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+        <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+        <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+        <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
+        </div>
       </div><!--uplink ends-->
     </div><!--row-->
  </div><!--footer ends-->

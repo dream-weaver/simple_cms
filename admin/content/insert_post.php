@@ -43,13 +43,13 @@
   $error_title="";
   $error_author="";
   $error_keywords="";
-  $error_menu="";
+  $error_cat="";
   $error_content="";
   $error_occured="";
   $post_title="";
   $post_author="";
   $post_keywords="";
-  $post_menu="";
+  $post_cat="";
   $post_content="";
   $post_image="";
 
@@ -72,8 +72,8 @@
       $error_occured="1";
     }
     //validate menu field
-    if(empty($_POST['menu'])){
-      $error_menu="Error occured: Menu is required </br>";
+    if(empty($_POST['cat'])){
+      $error_cat="Error occured: Category is required </br>";
       $error_occured="1";
     }
     //validate content field  
@@ -94,8 +94,8 @@
       $post_keywords=$_POST['keywords'];
     }
     //assigning value to local/defined variable
-    if(!empty($_POST['menu'])){
-      $post_menu=$_POST['menu'];
+    if(!empty($_POST['cat'])){
+      $post_cat=$_POST['cat'];
     }
     //assigning value to local/defined variable
     if(!empty($_POST['content'])){
@@ -156,21 +156,21 @@
             <label for="exampleInputEmail1"> Post Keywords:*</label><span class="error"><?php echo $error_keywords;  ?></span>
             <input class="form-control" type="text" value="<?php echo $post_keywords; ?>" name="keywords">
           </div>
-          <div class="form-group <?php if (!empty($error_menu)){echo "has-error";}?>">
-            <label for="exampleInputmenu">Menu:*</label><span class="error"><?php echo $error_menu;?></span>
-            <select class="form-control" name="menu">
+          <div class="form-group <?php if (!empty($error_cat)){echo "has-error";}?>">
+            <label for="exampleInputmenu">Menu:*</label><span class="error"><?php echo $error_cat;?></span>
+            <select class="form-control" name="cat">
               <option>Select a category</option>
                   <?php
                     include("../include/connect.php");
-                    $sql = "SELECT * FROM menu";
+                    $sql = "SELECT * FROM categories";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                       // output data of each row
                        while($row = $result->fetch_assoc()) {
-                          $menu_id=$row["menu_id"];
-                          $menu_name=$row["menu_name"];
+                          $cat_id=$row["cat_id"];
+                          $cat_title=$row["cat_title"];
 
-                          echo "<option value='$menu_id'>$menu_name</option>";
+                          echo "<option value='$cat_id'>$cat_title</option>";
                         }
                           
                       } else {
@@ -238,8 +238,8 @@
 
   move_uploaded_file($image_tmp, "images/$post_image");
   // sql to create table
-  $sql = "INSERT INTO `posts`(`menu_id`,`post_title`, `post_date`, `post_author`, `post_image`, `post_keywords`, `post_content`) 
-  VALUES ('$menu_id','$post_title','$post_date','$post_author',' $post_image','$post_keywords','$post_content')";
+  $sql = "INSERT INTO `posts`(`cat_id`,`post_title`, `post_date`, `post_author`, `post_image`, `post_keywords`, `post_content`) 
+  VALUES ('$post_cat','$post_title','$post_date','$post_author',' $post_image','$post_keywords','$post_content')";
 
   if ($conn->query($sql) === TRUE) {
       echo "<strong>Post Published successfully !</strong>";

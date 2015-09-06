@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  include ("../../include/functions.php");
+  if(!is_user_authentic()){
+    header( 'Location: ../login.php' );
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

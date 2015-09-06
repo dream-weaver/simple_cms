@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>EDIT MENU</title>
+    <title>ADD MENU</title>
     <!-- Bootstrap -->
     <link href="../../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional theme -->
@@ -50,24 +50,6 @@
   $error_cat="";
   $error_occured="";
   $post_cat="";
-
-  include("../include/connect.php");
-
-  $id=$_GET['id'];
-//$name=$_GET['name'];
-// sql to select a record
-  $sql = "SELECT * FROM categories WHERE cat_id=$id";
-  $result = $conn->query($sql);
-if ($result->num_rows > 0) {
-  // output data of each row
-   while($row = $result->fetch_assoc()) {
-    $post_cat=$row["cat_title"];
-     }
-      
-  } else {
-      echo "0 results";
-  }
-$conn->close();
  
   if(isset($_POST['submit'])){
     if ($_POST['submit']=="Publish_Now"){
@@ -86,8 +68,8 @@ $conn->close();
   <div class="container form">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h1>Edit Menu Here</h1>
-        <form action="edit_menu.php?id=<?php echo $id;?>" method="post">
+        <h1>Insert New Menu Here</h1>
+        <form action="insert_menu.php" method="post">
           <div class="form-group <?php if (!empty($error_cat)){echo "has-error";}?>">
             <label for="exampleInputEmail1">Menu Title:*</label><span class="error"><?php echo $error_cat;  ?></span>
             <input class="form-control" type="text" value="<?php echo $post_cat; ?>" name=cat>
@@ -139,20 +121,21 @@ $conn->close();
   if (empty($error_occured)   &&  isset($_POST['submit'])){
       echo "Thank You. Your form has been submitted successfully!!";
 
-   // sql to update table
-$sql = "UPDATE categories SET cat_title='$post_cat' WHERE cat_id='$id'";
-echo $sql;
-if ($conn->query($sql) === TRUE) {
-    echo "Update Menu Title successfully";
-} else {
-    echo "Error updating Menu title: " . $conn->error;
-}
+  // sql to create table
+  $sql = "INSERT INTO `categories`(`cat_title`) 
+  VALUES ('$post_cat')";
 
-$conn->close();
-}
-?> 
-<a href="list_menu.php">Back to List of Menus</a>
+  if ($conn->query($sql) === TRUE) {
+      echo "<strong>Menu Published successfully !</strong>";
+  } else {
+      echo "Error publishing Menu titles: " . $conn->error;
+  }
 
+  $conn->close();
+  }
+
+?>
+<a href="list_menu.php">Go to Admin List of Menu</a>
 
 
 

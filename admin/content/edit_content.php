@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  include ("../../include/functions.php");
+  if(!is_user_authentic()){
+    header( 'Location: ../login.php' );
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -218,7 +225,8 @@ $conn->close();
       echo "Thank You. Your form has been submitted successfully!!";
 
   move_uploaded_file($image_tmp, "images/$post_image");
-  c
+}
+?>
 
 
 

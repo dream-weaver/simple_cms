@@ -2,7 +2,7 @@
   session_start();
   include ("../../include/functions.php");
   if(!is_user_authentic()){
-    header( 'Location: ../login.php' );
+    header( 'Location: login.php' );
   }
 ?>
 <!DOCTYPE html>
@@ -12,15 +12,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>EDIT POST</title>
+    <title>Edit Post</title>
     <!-- Bootstrap -->
     <link href="../../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="../../Bootstrap/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../../styles/style.css">
     <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
-
-
+    <link href="../../styles/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/style.css">
+    <script src="../ckeditor/ckeditor.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,22 +40,20 @@
       }
   </style>
   <?php
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-
   $error_title="";
   $error_author="";
   $error_keywords="";
+  $error_cat="";
   $error_content="";
   $error_occured="";
   $post_title="";
   $post_author="";
   $post_keywords="";
+  $post_cat="";
   $post_content="";
   $post_image="";
 
-include("../include/connect.php");
+  include("../include/connect.php");
 
   $id=$_GET['id'];
 //$name=$_GET['name'];
@@ -98,6 +94,11 @@ $conn->close();
       $error_keywords="Error occured: Post Keywords is required </br>";
       $error_occured="1";
     }
+    //validate menu field
+    if(empty($_POST['cat'])){
+      $error_cat="Error occured: Category is required </br>";
+      $error_occured="1";
+    }
     //validate content field  
     if(empty($_POST['content'])){
       $error_content="Error occured: Post Content is required";
@@ -116,6 +117,10 @@ $conn->close();
       $post_keywords=$_POST['keywords'];
     }
     //assigning value to local/defined variable
+    if(!empty($_POST['cat'])){
+      $post_cat=$_POST['cat'];
+    }
+    //assigning value to local/defined variable
     if(!empty($_POST['content'])){
       $post_content=$_POST['content'];
     }
@@ -128,10 +133,15 @@ $conn->close();
   }
 }
   ?>
-  <div class="container form">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h1>EDIT CONTENT</h1>
+
+  <?php include("../include/header.php");?>
+  	<div class="container-fluid">
+      <div class="row">
+     	<?php include("../include/leftbar.php");?>
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+          <div class="content">
+            <h3>Welcome to Admin Panel !</h3>
+            <h4>Edit Content</h4>
 
         <div class="alert <?php if(!empty($error_occured)){echo "alert-danger";} ?>" role="alert">
             <?php if(!empty($error_title)){?>
@@ -174,6 +184,30 @@ $conn->close();
             <label for="exampleInputEmail1"> Post Keywords:*</label><span class="error"><?php echo $error_keywords;  ?></span>
             <input class="form-control" type="text" value="<?php echo $post_keywords; ?>" name="keywords">
           </div>
+          <div class="form-group <?php if (!empty($error_cat)){echo "has-error";}?>">
+            <label for="exampleInputmenu">Menu:*</label><span class="error"><?php echo $error_cat;?></span>
+            <select class="form-control" name="cat">
+              <option>Select a category</option>
+                  <?php
+                    include("../include/connect.php");
+                    $sql = "SELECT * FROM categories";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                      // output data of each row
+                       while($row = $result->fetch_assoc()) {
+                          $cat_id=$row["cat_id"];
+                          $cat_title=$row["cat_title"];
+
+                          echo "<option value='$cat_id'>$cat_title</option>";
+                        }
+                          
+                      } else {
+                          echo "0 results";
+                      }
+                    $conn->close();
+                  ?>                  
+            </select>
+          </div>
           <div class="form-group">
             <label for="exampleInputFile">Post Image:</label>
             <input type="file" name="image" value="upload" id="exampleInputFile">
@@ -181,22 +215,25 @@ $conn->close();
           </div>
           <div class="form-group <?php if (!empty($error_content)){echo "has-error";}?>">
             <label for="exampleInputEmail1"> Post Content:*</label><span class="error"><?php echo $error_content;  ?></span>
-            <textarea class="form-control" rows="10" cols="40" name="content"><?php echo $post_content; ?></textarea>
+            <textarea class="form-control" rows="10" cols="40"  name="content" id="content"><?php echo $post_content; ?></textarea>
           </div>
-          <button type="submit" value="Publish_Now" name="submit" class="btn btn-danger">Update</button>  
+          <button type="submit" value="Publish_Now" name="submit" class="btn btn-danger">Publish Now </button>  
         </form>
+            
+          </div>
+        </div>
       </div>
     </div>
-  </div>
- 
-
-  
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../../Bootstrap/js/bootstrap.min.js"></script>
     
-    <script>
+
+  <?php include("../include/footer.php");?>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../Bootstrap/js/bootstrap.min.js"></script>
+     <script>
       $('#myCarousel').carousel({
         interval:4000
       });
@@ -213,7 +250,14 @@ $conn->close();
     
     
 });
+
+
     </script>
+    <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+            </script>
 
   </body>
 </html>
@@ -227,23 +271,3 @@ $conn->close();
   move_uploaded_file($image_tmp, "images/$post_image");
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

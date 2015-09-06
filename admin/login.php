@@ -160,7 +160,7 @@ include("include/connect.php");
   if ($result->num_rows == 1){ 
       echo "<strong>Login successfully !</strong>";
       write_session();
-      header( 'Location: content/list_content.php' ) ;
+      header( 'Location: index.php' ) ;
   } else {
       echo "Username or Password is invalid";
   }

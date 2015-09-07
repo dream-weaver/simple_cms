@@ -26,20 +26,28 @@
     <![endif]-->
   </head>
   <body>
+  <style>
+  .link{
+      float:right;
+      padding-bottom: 20px; 
+      padding-right: 10px;     
+    }
+  </style>
 
   <?php include("../include/header.php");?>
   	<div class="container-fluid">
       <div class="row">
      	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
-             <h4>List Table of Menu</h4>           
+             <h4>List Table of Menu</h4> 
+             <table class="table table-hover">          
   <?php
 include("../include/connect.php");
 $sql = "SELECT * FROM `categories`";
 $result = $conn->query($sql);
-echo "<table border=\"1\">";
+
 echo "<td>"."Menu title"."</td>"."<td>"."Action"."</td>";
 if ($result->num_rows > 0) {
     // output data of each row
@@ -51,11 +59,12 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
-echo "</table>";
+
 $conn->close();
 ?> 
-<a href="insert_menu.php">Add New</a><br>
-<a href="../logout.php">Log out</a>
+</table>
+<div class="link"><a class="btn btn-success" href="insert_menu.php">Add New</a></div><br>
+
           </div>
         </div>
       </div>

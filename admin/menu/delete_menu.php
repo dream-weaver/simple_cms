@@ -31,7 +31,7 @@
   	<div class="container-fluid">
       <div class="row">
      	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
             <?php
@@ -50,7 +50,7 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?><br>
-<a href="list_menu.php">Return to Menu List</a>
+<a class="btn btn-success" href="list_menu.php">Return to Menu List</a>
             
           </div>
         </div>

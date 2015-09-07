@@ -26,40 +26,46 @@
     <![endif]-->
   </head>
   <body>
-
+  <style>
+    
+  </style>
   <?php include("../include/header.php");?>
   	<div class="container-fluid">
       <div class="row">
      	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
-            <h4>List Table of Contents</h4>           
+            <h4>List Table of Contents</h4>   
+            <div class="rightbutton pull-right"><a class="btn btn-success" href="insert_post.php" style="margin-bottom: 10px";>Add New</a></div>
+            <table class="table table table-striped table-bordered table-condensed">     
 				  <?php
 				include("../include/connect.php");
 				$sql = "SELECT * FROM `posts`";
 				$result = $conn->query($sql);
-				echo "<table border=\"1\">";
-				echo "<td>"."Post title"."</td>"."<td>"."Post Date"."</td>"."<td>"."Post Author"."</td>"."<td>"."Post Image"."</td>"."<td>"."Post Keywords"."</td>"."<td>"."Post Content"."</td>"."<td>"."Action"."</td>";
+			
+				echo "<td>"."Post title"."</td>"."<td>"."Post Date"."</td>"."<td>"."Post Author"."</td>"."<td>"."Menu"."</td>"."<td>"."Post Keywords"."</td>"."<td>"."Action"."</td>";
 				if ($result->num_rows > 0) {
 				    // output data of each row
 				    while($row = $result->fetch_assoc()) {
 				      echo "<tr>";
-				        echo "<td>". $row["post_title"]."</td>"."<td>". $row["post_date"]."</td>"."<td>".$row["post_author"]."</td>"."<td>".$row["post_image"]. "</td>"."<td>".$row["post_keywords"]."</td>"."<td>".$row["post_content"]."</td>"."<td>"."<a href='edit_content.php?id=".$row['post_id']."'>Edit</a>"."</td>"."<td>"."<a href='delete_content.php?id=".$row['post_id']."'>Delete</a>"."</td>"."<td>"."<a href='view_content.php?id=".$row['post_id']."'>View</a>"."</td>";
+				        echo "<td>". $row["post_title"]."</td>"."<td>". $row["post_date"]."</td>"."<td>".$row["post_author"]."</td>"."<td>".$row["cat_id"]."</td>"."<td>".$row["post_keywords"]."</td>"."<td>"."<a href='edit_content.php?id=".$row['post_id']."'>Edit</a>"."</td>"."<td>"."<a href='delete_content.php?id=".$row['post_id']."'>Delete</a>"."</td>"."<td>"."<a href='view_content.php?id=".$row['post_id']."'>View</a>"."</td>";
 				    }
 				      echo "</tr>";
 				} else {
 				    echo "0 results";
 				}
-				echo "</table>";
+			
 				$conn->close();
 				?>
+        </table>
           </div>
         </div>
       </div>
     </div>
-    <a href="insert_post.php">Add New</a><br>
-	<a href="../logout.php">Log out</a>
+    
+
+	 
   <?php include("../include/footer.php");?>
 
 

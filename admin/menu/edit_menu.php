@@ -36,6 +36,11 @@
         font-weight: bold;
         font-style: italic;
       }
+      .link{
+      float:right;
+      padding-bottom: 20px; 
+      padding-right: 10px;     
+    }
   </style>
   <?php
     echo "<pre>";
@@ -83,7 +88,7 @@ $conn->close();
   	<div class="container-fluid">
       <div class="row">
      	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
               <h4>Edit Menu Here</h4>
@@ -98,7 +103,7 @@ $conn->close();
         </div>
       </div>
     </div>
-   
+   <div class="link"><a class="btn btn-success" href="list_menu.php">Back to List of Menus</a></div><br><br>
   <?php include("../include/footer.php");?>
 
 
@@ -116,7 +121,7 @@ $conn->close();
 
    // sql to update table
 $sql = "UPDATE categories SET cat_title='$post_cat' WHERE cat_id='$id'";
-echo $sql;
+
 if ($conn->query($sql) === TRUE) {
     echo "Update Menu Title successfully";
 } else {
@@ -126,6 +131,6 @@ if ($conn->query($sql) === TRUE) {
 $conn->close();
 }
 ?> 
-<a href="list_menu.php">Back to List of Menus</a>
+
 
 

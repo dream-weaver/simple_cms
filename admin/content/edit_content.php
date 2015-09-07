@@ -38,6 +38,12 @@
         font-weight: bold;
         font-style: italic;
       }
+    .link{
+      float:right;
+      padding-bottom: 20px; 
+      padding-top: 20px;
+      padding-right: 10px;     
+    }
   </style>
   <?php
   $error_title="";
@@ -138,7 +144,7 @@ $conn->close();
   	<div class="container-fluid">
       <div class="row">
      	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
             <h4>Edit Content</h4>
@@ -224,7 +230,7 @@ $conn->close();
         </div>
       </div>
     </div>
-    
+    <div class="link"><a class="btn btn-success" href="list_content.php">Go to Admin List of Contents</a></div>
 
   <?php include("../include/footer.php");?>
 
@@ -269,5 +275,15 @@ $conn->close();
       echo "Thank You. Your form has been submitted successfully!!";
 
   move_uploaded_file($image_tmp, "images/$post_image");
+  // sql to update table
+$sql = "UPDATE posts SET post_title='$post_title', post_date='$post_date', post_author='$post_author', post_image='$post_image', post_keywords='$post_keywords', post_content='$post_content' WHERE post_id='$id'";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Update Post Content successfully";
+} else {
+    echo "Error updating Post Content: " . $conn->error;
 }
-?>
+
+$conn->close();
+}
+?> 

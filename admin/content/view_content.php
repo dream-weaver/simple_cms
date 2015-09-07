@@ -26,12 +26,19 @@
     <![endif]-->
   </head>
   <body>
+  <style>
+    .link{
+      float:right;
+      padding-bottom: 20px; 
+      padding-right: 10px;     
+    }
+  </style>
 
   <?php include("../include/header.php");?>
   	<div class="container-fluid">
       <div class="row">
      	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
             <h4>VIEW CONTENT</h4>
@@ -44,12 +51,12 @@
               if ($result->num_rows > 0) {
                 // output data of each row
                  while($row = $result->fetch_assoc()) {
-                    echo "Post title: ".$post_title=$row["post_title"]."</br>";
-                    echo "Post date: ".$post_date=$row["post_date"]."</br>";
-                    echo "Post author: ".$post_author=$row["post_author"]."</br>";
-                    echo "Post image: ".$post_image=$row["post_image"]. "</br>";
-                    echo "Post keywords: ".$post_keywords=$row["post_keywords"]."</br>";
-                    echo "Post content: ".$post_content=$row["post_content"]."</br>";
+                    echo "<strong>Post title: </strong>".$post_title=$row["post_title"]."</br>";
+                    echo "<strong>Post date: </strong>".$post_date=$row["post_date"]."</br>";
+                    echo "<strong>Post author: </strong>".$post_author=$row["post_author"]."</br>";
+                    echo "<strong>Post image: </strong>".$post_image=$row["post_image"]. "</br>";
+                    echo "<strong>Post keywords: </strong>".$post_keywords=$row["post_keywords"]."</br>";
+                    echo "<strong>Post content: </strong>".$post_content=$row["post_content"]."</br>";
                   }
                     
                 } else {
@@ -57,7 +64,7 @@
                 }
               $conn->close();
               ?><br>
-              <a href="list_content.php">Return to Admin List of Contents</a>
+              <div class="link"><a class="btn btn-success" href="list_content.php">Return to Admin List of Contents</a></div>
 
           </div>
         </div>

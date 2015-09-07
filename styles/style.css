@@ -235,8 +235,8 @@ ul.nav li.dropdown:hover > ul.dropdown-menu{
   background-color:transparent;
 }
 /*------------------------content start----------------------*/
-.content{
-   
+.container.content {
+    background: #fff none repeat scroll 0 0!important;
 }
 .thumbnail > img {
     width: 283px; 

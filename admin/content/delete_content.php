@@ -30,8 +30,8 @@
   <?php include("../include/header.php");?>
   	<div class="container-fluid">
       <div class="row">
-     	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+     	<?php include("../include/leftbar.php");?> 
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
                           <?php
@@ -50,7 +50,7 @@
 
               $conn->close();
               ?><br>
-              <a href="list_content.php">Return to Admin List</a>
+              <a class="btn btn-success" href="list_content.php">Return to Admin List</a>
           </div>
         </div>
       </div>

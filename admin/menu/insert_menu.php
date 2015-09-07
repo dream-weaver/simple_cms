@@ -31,11 +31,16 @@
       color:red;
     }
     .message>h3{
-        color: green;
-        font-size: 14px;
-        font-weight: bold;
-        font-style: italic;
-      }
+      color: green;
+      font-size: 14px;
+      font-weight: bold;
+      font-style: italic;
+    }
+    .link{
+      float:right;
+      padding-bottom: 20px; 
+      padding-right: 10px;     
+    }
   </style>
   <?php
     echo "<pre>";
@@ -65,7 +70,7 @@
     <div class="container-fluid">
       <div class="row">
       <?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
                 <h4>Insert New Menu Here</h4>
@@ -80,7 +85,7 @@
         </div>
       </div>
     </div>
- 
+    <div class="link"><a class="btn btn-success" href="list_menu.php">Go to Admin List of Menu</a></div><br><br><br>
   <?php include("../include/footer.php");?>
 
 
@@ -110,7 +115,7 @@
   }
 
 ?>
-<a href="list_menu.php">Go to Admin List of Menu</a>
+
 
 
 

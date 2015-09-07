@@ -33,11 +33,16 @@
       color:red;
     }
     .message>h3{
-        color: green;
-        font-size: 14px;
-        font-weight: bold;
-        font-style: italic;
-      }
+      color: green;
+      font-size: 14px;
+      font-weight: bold;
+      font-style: italic;
+    }
+    .link{
+      float:right;
+      padding-bottom: 20px; 
+      padding-right: 10px;     
+    }
   </style>
   <?php
   $error_title="";
@@ -115,7 +120,7 @@
   	<div class="container-fluid">
       <div class="row">
      	<?php include("../include/leftbar.php");?>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 rightbar">
           <div class="content">
             <h3>Welcome to Admin Panel !</h3>
             <h4>Insert New Post Here</h4>
@@ -142,7 +147,7 @@
           <h3>
           <?php
             if (empty($error_occured)   &&  isset($_POST['submit'])){
-              echo "Thank You. Your form has been submitted successfully!!";
+              echo "Thank You. Your post has been inserted successfully!!";
             }
           ?>
           </h3>
@@ -164,7 +169,8 @@
           <div class="form-group <?php if (!empty($error_cat)){echo "has-error";}?>">
             <label for="exampleInputmenu">Menu:*</label><span class="error"><?php echo $error_cat;?></span>
             <select class="form-control" name="cat">
-              <option>Select a category</option>
+              <option value="">Select a category</option>
+              
                   <?php
                     include("../include/connect.php");
                     $sql = "SELECT * FROM categories";
@@ -174,10 +180,11 @@
                        while($row = $result->fetch_assoc()) {
                           $cat_id=$row["cat_id"];
                           $cat_title=$row["cat_title"];
-
-                          echo "<option value='$cat_id'>$cat_title</option>";
+                          if( $post_cat==$cat_id){$selected= "selected='selected'";}else{
+                            $selected="";
+                          }
+                          echo "<option value='$cat_id' $selected >$cat_title</option>";
                         }
-                          
                       } else {
                           echo "0 results";
                       }
@@ -200,7 +207,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><br>
+    <div class="link"><a class="btn btn-success" href="list_content.php">Go to Admin List of Contents</a></div>
+
     
 
   <?php include("../include/footer.php");?>
@@ -242,7 +251,7 @@
   include("../include/connect.php");
 
   if (empty($error_occured)   &&  isset($_POST['submit'])){
-      echo "Thank You. Your form has been submitted successfully!!";
+       "Thank You. Your form has been submitted successfully!!";
 
   move_uploaded_file($image_tmp, "images/$post_image");
   // sql to create table
@@ -250,7 +259,7 @@
   VALUES ('$post_cat','$post_title','$post_date','$post_author',' $post_image','$post_keywords','$post_content')";
 
   if ($conn->query($sql) === TRUE) {
-      echo "<strong>Post Published successfully !</strong>";
+       "<strong>Post Published successfully !</strong>";
   } else {
       echo "Error publishing Post values: " . $conn->error;
   }
@@ -259,5 +268,4 @@
   }
 
 ?>
-<a href="list_content.php">Go to Admin List of Contents</a>
 

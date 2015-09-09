@@ -41,7 +41,9 @@
             <table class="table table table-striped table-bordered table-condensed">     
 				  <?php
 				include("../include/connect.php");
-				$sql = "SELECT * FROM `posts`";
+				$sql = "SELECT * FROM posts
+                LEFT OUTER JOIN categories
+                ON posts.cat_id=categories.cat_id";
 				$result = $conn->query($sql);
 			
 				echo "<td>"."Post title"."</td>"."<td>"."Post Date"."</td>"."<td>"."Post Author"."</td>"."<td>"."Menu"."</td>"."<td>"."Post Keywords"."</td>"."<td>"."Action"."</td>";
@@ -49,7 +51,7 @@
 				    // output data of each row
 				    while($row = $result->fetch_assoc()) {
 				      echo "<tr>";
-				        echo "<td>". $row["post_title"]."</td>"."<td>". $row["post_date"]."</td>"."<td>".$row["post_author"]."</td>"."<td>".$row["cat_id"]."</td>"."<td>".$row["post_keywords"]."</td>"."<td>"."<a href='edit_content.php?id=".$row['post_id']."'>Edit</a>"."</td>"."<td>"."<a href='delete_content.php?id=".$row['post_id']."'>Delete</a>"."</td>"."<td>"."<a href='view_content.php?id=".$row['post_id']."'>View</a>"."</td>";
+				        echo "<td>". $row["post_title"]."</td>"."<td>". $row["post_date"]."</td>"."<td>".$row["post_author"]."</td>"."<td>".$row["cat_title"]."</td>"."<td>".$row["post_keywords"]."</td>"."<td>"."<a href='edit_content.php?id=".$row['post_id']."'>Edit</a>"."</td>"."<td>"."<a href='delete_content.php?id=".$row['post_id']."'>Delete</a>"."</td>"."<td>"."<a href='view_content.php?id=".$row['post_id']."'>View</a>"."</td>";
 				    }
 				      echo "</tr>";
 				} else {

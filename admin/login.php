@@ -73,9 +73,7 @@
 
 
   <?php
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    
 
     $error_username="";
     $error_password="";

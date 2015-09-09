@@ -70,6 +70,7 @@ if ($result->num_rows > 0) {
   // output data of each row
    while($row = $result->fetch_assoc()) {
       $post_title=$row["post_title"];
+      $post_cat=$row["cat_id"];
       $post_date=$row["post_date"];
       $post_author=$row["post_author"];
       $post_image=$row["post_image"];
@@ -203,15 +204,16 @@ $conn->close();
                        while($row = $result->fetch_assoc()) {
                           $cat_id=$row["cat_id"];
                           $cat_title=$row["cat_title"];
-
-                          echo "<option value='$cat_id'>$cat_title</option>";
+                          if( $post_cat==$cat_id){$selected= "selected='selected'";}else{
+                            $selected="";
+                          }
+                          echo "<option value='$cat_id' $selected >$cat_title</option>";
                         }
-                          
                       } else {
                           echo "0 results";
                       }
                     $conn->close();
-                  ?>                  
+                  ?>                   
             </select>
           </div>
           <div class="form-group">
@@ -276,7 +278,7 @@ $conn->close();
 
   move_uploaded_file($image_tmp, "images/$post_image");
   // sql to update table
-$sql = "UPDATE posts SET post_title='$post_title', post_date='$post_date', post_author='$post_author', post_image='$post_image', post_keywords='$post_keywords', post_content='$post_content' WHERE post_id='$id'";
+$sql = "UPDATE posts SET cat_id='$post_cat',post_title='$post_title', post_date='$post_date', post_author='$post_author', post_image='$post_image', post_keywords='$post_keywords', post_content='$post_content' WHERE post_id='$id'";
 
 if ($conn->query($sql) === TRUE) {
     echo "Update Post Content successfully";
